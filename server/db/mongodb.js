@@ -26,7 +26,7 @@ async function agregateStock(stockCollection) {
       }
     },
     {
-      $sort: { totalItems: -1 } 
+      $sort: { _id: 1 } 
     }
   ];
    const result = await stockCollection.aggregate(aggregationPipeline).toArray();

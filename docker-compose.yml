@@ -1,18 +1,32 @@
 version: "3.9"
 services:
-  test-maximum_node:
+  test-maximum_backend:
     build:
-      dockerfile: ./docker/node/Dockerfile
+      dockerfile: ./docker/backend/Dockerfile
       context: ./
-    container_name: test-maximum_node
+    container_name: test-maximum_backend
     restart: always
-    command: tail -F anything
+    command: npm run dev
     ports:
       - 777:777
     networks:
       - test-maximum-network
     volumes:
     - ./server:/var/www
+
+  test-maximum_frontend:
+    build:
+      dockerfile: ./docker/frontend/Dockerfile
+      context: ./
+    container_name: test-maximum_frontend
+    restart: always
+    command: npm run dev
+    ports:
+      - 5173:5173
+    networks:
+      - test-maximum-network
+    volumes:
+    - ./client:/var/www
 
 networks:
   test-maximum-network:
